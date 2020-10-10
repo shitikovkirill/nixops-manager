@@ -1,9 +1,7 @@
 builtins.fetchTarball {
-  name = "nixos-unstable-2019-03-08";
-  #url = https://github.com/johanot/nixpkgs/archive/b3905f0d224bc5c2da3572f7017f05a27df742cd.tar.gz;
-  #sha256 = "05jxiyagfgl7s061vz2xmalrrbaz95ymcxdv89j3s700hicyd8pf";
-  url = https://github.com/NixOS/nixpkgs/archive/f7f1a2f54ef2b744a26e37418dd6354bc46aa20a.tar.gz;
-  sha256 = "061sissl4kr4bzh7pl9a1vihmvf71k9iw0kblvhgvvp6pl10sv0r";
+  name = "nixos-unstable-20.09-beta";
+  url = https://github.com/NixOS/nixpkgs/archive/20.09-beta.tar.gz;
+  sha256 = "sha256:1iysc4xyk88ngkfb403xfq5bs3zy29zfs83pn99kchxd45nbpb5q";
 }
 
 # How to push a cache to arm.nixos.org

@@ -1,7 +1,7 @@
 #! /usr/bin/env nix-shell
 #! nix-shell -I nixpkgs-overlays=./overlays
-#! nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/f7f1a2f54ef2b744a26e37418dd6354bc46aa20a.tar.gz
-#! nix-shell -i bash -p nixopsUnstable3 which jq nix openssl openssh
+#! nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/20.09-beta.tar.gz
+#! nix-shell -i bash -p nixops which jq nix openssl openssh
 
 
 # A NixOps Wrapper for Git Projects
@@ -20,7 +20,7 @@ here=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 deployment="$1"
 command="$2"
-state_file="$here/${deployment}/${deployment}.nixops"
+state_file="$here/secrets/${deployment}.nixops"
 
 export NIX_PATH=nixpkgs-overlays=./overlays:nixpkgs=$(nix-instantiate --eval ./nixpkgs.nix | tr -d '"' ):./${deployment}
 
@@ -32,7 +32,7 @@ if [[ $deployment == --* ]]; then
   nixops "$@"
   exit $?
 elif [ "$command" == ".shell" ]; then
-    exec nix-shell -p nixopsUnstable3 --command "echo You may now run commands for deployment:$deploymnet with \\'nixops\\' ; return "
+    exec nix-shell -p nixops --command "echo You may now run commands for deployment:$deploymnet with \\'nixops\\' ; return "
 elif [ ! -e "$state_file" ] && [ "$command" != "create" ]; then
   >&2 echo "You're trying to use a deployment that doesn't exist yet. Try running $0 $deployment create"
   exit 1
